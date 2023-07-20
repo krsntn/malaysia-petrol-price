@@ -1,11 +1,14 @@
-import puppeteer from "puppeteer";
+import chromium from "chrome-aws-lambda";
 
 export const handler = async () => {
   try {
-    const browser = await puppeteer.launch({
-      headless: "new",
-      protocolTimeout: 0,
+    const browser = await chromium.puppeteer.launch({
+      executablePath: await chromium.executablePath,
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      headless: chromium.headless,
     });
+
     const page = await browser.newPage();
 
     await page.goto(
