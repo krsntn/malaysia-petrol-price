@@ -1,5 +1,5 @@
-const chromium = require("@sparticuz/chromium");
-const puppeteer = require("puppeteer-core");
+import chromium from "@sparticuz/chromium";
+import puppeteer from "puppeteer-core";
 
 export const handler = async () => {
   const browser = await puppeteer.launch({
