@@ -1,14 +1,10 @@
-import puppeteer from "puppeteer-core";
-import chromium from "@sparticuz/chromium-min";
+import chromium from "chrome-aws-lambda";
 
 export const handler = async () => {
-  const browser = await puppeteer.launch({
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath(
-      "https://github.com/Sparticuz/chromium/releases/download/v113.0.1/chromium-v113.0.1-pack.tar"
-    ),
-    headless: chromium.headless,
+  const browser = await chromium.puppeteer.launch({
+    executablePath: await chromium.executablePath,
+    args: await chromium.args,
+    headless: true,
   });
 
   try {
@@ -53,7 +49,6 @@ export const handler = async () => {
       });
       return Promise.resolve(data);
     });
-
     return {
       statusCode: 200,
       body: JSON.stringify(data),
