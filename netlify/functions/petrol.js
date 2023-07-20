@@ -1,14 +1,17 @@
 import puppeteer from "puppeteer-core";
-import chromium from "chrome-aws-lambda";
+import chromium from "@sparticuz/chromium-min";
 
 export const handler = async () => {
-  try {
-    const browser = await puppeteer.launch({
-      executablePath: await chromium.executablePath,
-      args: chromium.args,
-      headless: true,
-    });
+  const browser = await puppeteer.launch({
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath(
+      "https://github.com/Sparticuz/chromium/releases/download/v113.0.1/chromium-v113.0.1-pack.tar"
+    ),
+    headless: chromium.headless,
+  });
 
+  try {
     const page = await browser.newPage();
 
     await page.goto(
@@ -50,6 +53,7 @@ export const handler = async () => {
       });
       return Promise.resolve(data);
     });
+
     return {
       statusCode: 200,
       body: JSON.stringify(data),
@@ -62,5 +66,7 @@ export const handler = async () => {
         error: "internal server error",
       }),
     };
+  } finally {
+    browser.close();
   }
 };
