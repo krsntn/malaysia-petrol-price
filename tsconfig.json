@@ -1,0 +1,7 @@
+{
+  /* Shadcn guide */
+  "baseUrl": ".",
+  "paths": {
+    "@/*": ["./src/*"]
+  }
+}
