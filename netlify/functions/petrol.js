@@ -1,12 +1,16 @@
 import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 
+chromium.setHeadlessMode = true;
+chromium.setGraphicsMode = false;
+
 export const handler = async () => {
   const browser = await puppeteer.launch({
-    executablePath: await chromium.executablePath(),
+    executablePath:
+      process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath),
     defaultViewport: chromium.defaultViewport,
     args: chromium.args,
-    headless: true,
+    headless: chromium.headless,
   });
 
   try {
