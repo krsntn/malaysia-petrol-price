@@ -1,5 +1,8 @@
-import chromium from "chrome-aws-lambda";
+import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
+
+chromium.setHeadlessMode = true;
+chromium.setGraphicsMode = false;
 
 export const handler = async () => {
   const browser = await puppeteer.launch({
