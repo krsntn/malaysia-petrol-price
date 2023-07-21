@@ -9,6 +9,9 @@
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
     "chrome-aws-lambda": "^10.1.0",
