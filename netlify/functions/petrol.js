@@ -1,14 +1,12 @@
 import chromium from "chrome-aws-lambda";
-
-chromium.setHeadlessMode = true;
-chromium.setGraphicsMode = false;
+import puppeteer from "puppeteer-core";
 
 export const handler = async () => {
-  const browser = await chromium.puppeteer.launch({
+  const browser = await puppeteer.launch({
     executablePath: await chromium.executablePath,
     defaultViewport: chromium.defaultViewport,
     args: chromium.args,
-    headless: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+    headless: true,
   });
 
   try {
