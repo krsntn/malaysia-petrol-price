@@ -22,7 +22,7 @@ export const handler = async () => {
     );
 
     await page.waitForSelector(
-      "#single_container > div.container-1232.px-40.background-white.py-32 > div.columns > div.column.column_wide > div.scontent.portfolio__content > figure:nth-child(13) > table",
+      "#single_container > div.container-1232.px-40.background-white.py-32 > div.columns > div.column.column_wide > div.scontent.portfolio__content > figure:nth-child(12) > table",
     );
 
     const data = await page.evaluate(() => {
