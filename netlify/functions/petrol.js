@@ -1,31 +1,27 @@
-import chromium from "@sparticuz/chromium";
-import puppeteer from "puppeteer-core";
-
-chromium.setHeadlessMode = true;
-chromium.setGraphicsMode = false;
+import chromium from "chrome-aws-lambda";
 
 export const handler = async () => {
-  const browser = await puppeteer.launch({
-    executablePath: await chromium.executablePath,
-    defaultViewport: chromium.defaultViewport,
+  const browser = await chromium.puppeteer.launch({
     args: chromium.args,
-    headless: true,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath,
+    headless: chromium.headless,
   });
 
   try {
     const page = await browser.newPage();
 
     await page.goto(
-      "https://ringgitplus.com/en/blog/petrol-credit-card/petrol-price-malaysia-live-updates-ron95-ron97-diesel.html"
+      "https://ringgitplus.com/en/blog/petrol-credit-card/petrol-price-malaysia-live-updates-ron95-ron97-diesel.html",
     );
 
     await page.waitForSelector(
-      "#single_container > div.container-1232.px-40.background-white.py-32 > div.columns > div.column.column_wide > div.scontent.portfolio__content > figure:nth-child(13) > table"
+      "#single_container > div.container-1232.px-40.background-white.py-32 > div.columns > div.column.column_wide > div.scontent.portfolio__content > figure:nth-child(13) > table",
     );
 
     const data = await page.evaluate(() => {
       const priceTable = document.querySelectorAll(
-        "#single_container > div.container-1232.px-40.background-white.py-32 > div.columns > div.column.column_wide > div.scontent.portfolio__content > figure:nth-child(12) > table tr"
+        "#single_container > div.container-1232.px-40.background-white.py-32 > div.columns > div.column.column_wide > div.scontent.portfolio__content > figure:nth-child(12) > table tr",
       );
 
       const data = [];
