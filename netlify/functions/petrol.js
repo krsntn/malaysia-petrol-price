@@ -59,6 +59,11 @@ export const handler = async () => {
     return {
       statusCode: 200,
       body: JSON.stringify(data),
+      headers: {
+        "Access-Control-Allow-Origin": "*", // Replace with your React app's domain
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
     };
   } catch (e) {
     console.log("error", e);
