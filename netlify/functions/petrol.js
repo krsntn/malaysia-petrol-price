@@ -1,11 +1,17 @@
-import chromium from "chrome-aws-lambda";
+import chromium from "@sparticuz/chromium";
+import puppeteer from "puppeteer-core";
+
+chromium.setHeadlessMode = true;
+chromium.setGraphicsMode = false;
 
 export const handler = async () => {
-  const browser = await chromium.puppeteer.launch({
-    args: chromium.args,
+  const browser = await puppeteer.launch({
+    executablePath: await chromium.executablePath(
+      "https://github.com/Sparticuz/chromium/releases/download/v113.0.1/chromium-v113.0.1-pack.tar",
+    ),
     defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath,
-    headless: chromium.headless,
+    args: chromium.args,
+    headless: true,
   });
 
   try {
