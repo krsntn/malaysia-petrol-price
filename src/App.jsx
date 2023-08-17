@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -9,52 +10,57 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const data = [
-  {
-    from: "July 20, 2023",
-    through: "July 26, 2023",
-    ron95: ["RM 2.05", "RM 0"],
-    ron97: ["RM 3.37", "RM 0"],
-    diesel: ["RM 2.15", "RM 0"],
-  },
-  {
-    from: "July 13, 2023",
-    through: "July 19, 2023",
-    ron95: ["RM 2.05", "RM 0"],
-    ron97: ["RM 3.37", "RM 0"],
-    diesel: ["RM 2.15", "RM 0"],
-  },
-  {
-    from: "July 6, 2023",
-    through: "July 12, 2023",
-    ron95: ["RM 2.05", "RM 0"],
-    ron97: ["RM 3.37", "RM 0"],
-    diesel: ["RM 2.15", "RM 0"],
-  },
-  {
-    from: "June 29, 2023",
-    through: "July 5, 2023",
-    ron95: ["RM 2.05", "RM 0"],
-    ron97: ["RM 3.37", "RM 0"],
-    diesel: ["RM 2.15", "RM 0"],
-  },
-  {
-    from: "June 22, 2023",
-    through: "June 28, 2023",
-    ron95: ["RM 2.05", "RM 0"],
-    ron97: ["RM 3.37", "RM 0"],
-    diesel: ["RM 2.15", "RM 0"],
-  },
-  {
-    from: "June 15, 2023",
-    through: "June 21, 2023",
-    ron95: ["RM 2.05", "RM 0"],
-    ron97: ["RM 3.37", "RM 0"],
-    diesel: ["RM 2.15", "RM 0"],
-  },
-];
-
 function App() {
+  const [data, setData] = useState([
+    {
+      from: "July 20, 2023",
+      through: "July 26, 2023",
+      ron95: ["RM 2.05", "RM 0"],
+      ron97: ["RM 3.37", "RM 0"],
+      diesel: ["RM 2.15", "RM 0"],
+    },
+    {
+      from: "July 13, 2023",
+      through: "July 19, 2023",
+      ron95: ["RM 2.05", "RM 0"],
+      ron97: ["RM 3.37", "RM 0"],
+      diesel: ["RM 2.15", "RM 0"],
+    },
+    {
+      from: "July 6, 2023",
+      through: "July 12, 2023",
+      ron95: ["RM 2.05", "RM 0"],
+      ron97: ["RM 3.37", "RM 0"],
+      diesel: ["RM 2.15", "RM 0"],
+    },
+    {
+      from: "June 29, 2023",
+      through: "July 5, 2023",
+      ron95: ["RM 2.05", "RM 0"],
+      ron97: ["RM 3.37", "RM 0"],
+      diesel: ["RM 2.15", "RM 0"],
+    },
+    {
+      from: "June 22, 2023",
+      through: "June 28, 2023",
+      ron95: ["RM 2.05", "RM 0"],
+      ron97: ["RM 3.37", "RM 0"],
+      diesel: ["RM 2.15", "RM 0"],
+    },
+    {
+      from: "June 15, 2023",
+      through: "June 21, 2023",
+      ron95: ["RM 2.05", "RM 0"],
+      ron97: ["RM 3.37", "RM 0"],
+      diesel: ["RM 2.15", "RM 0"],
+    },
+  ]);
+  useEffect(() => {
+    fetch("https://dulcet-kringle-c21419.netlify.app/.netlify/functions/petrol")
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
   return (
     <>
       <div className="max-w-2xl m-auto">
