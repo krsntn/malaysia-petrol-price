@@ -160,7 +160,7 @@ function App() {
       </ScrollArea>
 
       <div className="text-xs mt-10">
-        © 2020, Built by <a href="https://dev.krsn.xyz">Karson</a>
+        © 2020, Built by <a href="https://krsn.xyz">Karson</a>
       </div>
     </div>
   );
